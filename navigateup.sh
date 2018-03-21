@@ -1,3 +1,4 @@
+#!/bin/bash
 
 n=$1
 path=$pwd
