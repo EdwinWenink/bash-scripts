@@ -6,6 +6,6 @@ if [ -f "$1" ]; then
         file=$(basename "$1$")
         filename=${file%.*}
         pandoc "$1" -s -o "$filename".pdf
-        evince "$filename".pdf
+        zathura "$filename".pdf & disown
 fi
 
