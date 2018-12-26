@@ -6,7 +6,7 @@
 
 * topdf.sh 
 
-	A script that uses pandoc to quickly convert a markdown file (.md) to pdf in the current directory. After converting, evince is called to open the pdf. This commant is handy to call directly from vim (:! topdf.sh currentfilename.md).
+	A script that uses pandoc to quickly convert a markdown file (.md) to pdf in the current directory. After converting, evince is called to open the pdf. This command is handy to call directly from vim (:! topdf.sh currentfilename.md).
 
 * openAndDisown.sh
 
