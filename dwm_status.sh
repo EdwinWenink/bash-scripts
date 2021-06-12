@@ -37,6 +37,13 @@ print_mem(){
 	echo -e "$memfree"
 }
 
+print_playing(){
+	#artist=$(playerctl metadata artist)
+	#song=$(playerctl metadata title)
+	#echo "$(artist) - $(title)"
+	# When not calling this script often, use --follow mode
+	echo $(playerctl metadata --all-players --format '{{artist}} - {{title}}')
+}
 
 print_temp(){
 	test -f /sys/class/thermal/thermal_zone0/temp || return 0
@@ -45,12 +52,13 @@ print_temp(){
 
 # Misschien handig voor rebooten; zoek uit hoe dit goed werkt
 #killall dwm_status.sh
+#pkill -f dwm_status.sh
 
 while true; do
 	BATT=$( acpi -b | sed 's/.*[charging|unknown], \([0-9]*\)%.*/\1/gi' )
 	STATUS=$( acpi -b | sed 's/.*: \([a-zA-Z]*\),.*/\1/gi' )
 	#xsetroot -name "$(print_wifi) | $(print_temp) `echo $BATT % $STATUS` ` date +"%R"`"
 	#xsetroot -name "`echo $BATT % $STATUS` ` date +"%R"`"
-	xsetroot -name " $(print_ip) | `echo $BATT% $STATUS` | `date +"%R"`"
+	xsetroot -name " $(print_playing) $(print_volume) | $(print_ip) | `echo $BATT% $STATUS` | `date +"%R"`"
 	sleep 1
 done &
