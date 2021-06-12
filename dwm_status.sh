@@ -1,11 +1,12 @@
 print_volume() {
 	volume="$(amixer get Master | tail -n1 | sed -r 's/.*\[(.*)%\].*/\1/')"
-	if test "$volume" -gt 0
+
+	if amixer get Master | tail -n1 | grep -q off
 	then
-		echo -e "\uE05D${volume}"
+	  echo -e "x\u266D"
 	else
-		echo -e "Mute"
-	fi
+	  echo -e "${volume}\u266D"
+ 	fi
 }
 
 print_ip() {
@@ -59,6 +60,6 @@ while true; do
 	STATUS=$( acpi -b | sed 's/.*: \([a-zA-Z]*\),.*/\1/gi' )
 	#xsetroot -name "$(print_wifi) | $(print_temp) `echo $BATT % $STATUS` ` date +"%R"`"
 	#xsetroot -name "`echo $BATT % $STATUS` ` date +"%R"`"
-	xsetroot -name " $(print_playing) $(print_volume) | $(print_ip) | `echo $BATT% $STATUS` | `date +"%R"`"
+	xsetroot -name " $(print_playing) $(print_volume) | $(print_ip) | `echo $BATT% $STATUS` | `date +"W%W %d %b | %R"`"
 	sleep 1
 done &
